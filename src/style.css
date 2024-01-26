@@ -1,0 +1,21 @@
+body, html{
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+body{
+    background-size: cover;
+    background-position: 20% 20%;
+
+}
+
+/* #background-img{
+    width: 100vw;
+    height: auto;
+    position: absolute;
+    bottom: -111%;
+    overflow: hidden;
+    z-index: 0;
+} */
