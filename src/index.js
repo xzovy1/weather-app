@@ -6,8 +6,7 @@ import { fetchWeather } from './weather-api';
 
 const body = document.querySelector('body');
 body.style.backgroundImage = `url(${background})`;
-// let area = prompt('Location?');
-// let area = 'Edmonton'
+
 function updateText(variable, data , unit){
     if(variable.textContent !== ''){
         variable.textContent = '';
@@ -16,38 +15,40 @@ function updateText(variable, data , unit){
     if(unit && variable.textContent !== ''){
         variable.textContent += ` °${unit}`
     }
-    return variable.textContent;
 }
 
 const getWeatherData = (area = 'edmonton') => {
     fetchWeather(area ).then((values) => {
-        console.log(values.current.condition.icon)
         icon.src = values.current.condition.icon
-        // city.textContent =  values.location.name;
-        updateText(city, values.location.name);
-        updateText(region, values.location.region);
-        updateText(currentTemp, values.current.temp_c, 'C');
-        updateText(feelsLike, values.current.feelslike_c, 'C');
-        updateText(humidity, values.current.humidity);
-        updateText(lastUpdated, values.current.last_updated)
+        dataArray.forEach((element) => {
+            let obj, objParam;
+            function getPosition(element){
+                obj = element.closest('div').getAttribute('class');
+                objParam = element.getAttribute('id')
+            }
+            getPosition(element)
+            updateText(element, values[obj][objParam])
+        })
     }
 )}
 
 getWeatherData();
 
-const city = document.getElementById('city-name');
-const region = document.getElementById('region-name');
+
+const city = document.getElementById('name');
+const region = document.getElementById('region');
 const currentTemp = document.getElementById('temp_c');
-const feelsLike = document.getElementById('feels_like');
+const feelsLike = document.getElementById('feelslike_c');
 const humidity = document.getElementById('humidity');
 const lastUpdated = document.getElementById('last_updated');
 const searchBar = document.getElementById('search-bar');
 const searchButton = document.getElementById('search-button');
 const icon = document.getElementById('weather-condition');
 
+const dataArray = [city, region, currentTemp, feelsLike, humidity, lastUpdated];
+
 searchButton.addEventListener('click', (e) => {
     e.preventDefault();
-    // console.log(getWeatherData(searchBar.value))
     getWeatherData(searchBar.value)
 })
 
