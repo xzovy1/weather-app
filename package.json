@@ -20,6 +20,7 @@
     "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
+    "pexels": "^1.4.0",
     "save-dev": "^0.0.1-security"
   }
 }

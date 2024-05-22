@@ -1,11 +1,19 @@
 
 import './style.css';
-import background from './assets/iccup-Rljwy2QK4YE-unsplash.jpg';
+// import background from './assets/iccup-Rljwy2QK4YE-unsplash.jpg';
 import { fetchWeather } from './weather-api';
+import { fetchBackground } from './backgroundImg-api';
 
 
-const body = document.querySelector('body');
-body.style.backgroundImage = `url(${background})`;
+const getBackground = (query) => {
+    fetchBackground(query).then(
+        response => {
+            const background = document.querySelector('video');
+            console.log(response.url)
+            body.style.backgroundImage = `url(${response.url})`
+        }
+    )
+}
 
 function updateText(variable, data , unit){
     if(variable.textContent !== ''){
@@ -18,8 +26,9 @@ function updateText(variable, data , unit){
 }
 
 const getWeatherData = (area = 'edmonton') => {
-    fetchWeather(area ).then((values) => {
+    fetchWeather(area).then((values) => {
         icon.src = values.current.condition.icon
+        getBackground(values.current.condition.text)
         dataArray.forEach((element) => {
             let obj, objParam;
             function getPosition(element){
@@ -51,11 +60,4 @@ searchButton.addEventListener('click', (e) => {
     e.preventDefault();
     getWeatherData(searchBar.value)
 })
-
-
-
-
-
-
-
 
