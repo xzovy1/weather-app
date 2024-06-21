@@ -9,8 +9,7 @@ const getBackground = (query) => {
     fetchBackground(query).then(
         response => {
             const background = document.querySelector('video');
-            console.log(response.url)
-            body.style.backgroundImage = `url(${response.url})`
+            background.src = `${response}`
         }
     )
 }

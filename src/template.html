@@ -6,13 +6,14 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
 </head>
 <body>
+    <video id="background-video" autoplay muted type="video/mp4"></video>
+    <div class="body">
     <h1 class="title">Today's Weather</h1>
     <div class="search-section">
         <span class="search">Search City: <input type="search" name="location-search" id="search-bar"></span>
         <span><button id="search-button">Search</button></span>
     </div>
     <img src="" alt="weather condition" id="weather-condition">
-    <div class="body">
         <div class="location">
             <p>City: </p><span id="name"></span>
             <p>Region: </p><span id="region"></span>
